@@ -61,29 +61,40 @@
 
   <script>
     const saunas = [
-      { name: "よこはま温泉（和光市）", map: "https://maps.google.com/?q=よこはま温泉 和光市" },
-      { name: "スパジアムジャポン（東久留米）", map: "https://maps.google.com/?q=スパジアムジャポン 東久留米" },
-      { name: "サウナ&カプセルホテル北欧（上野）", map: "https://maps.google.com/?q=サウナ 北欧 上野" },
-      { name: "サウナセンター（鶯谷）", map: "https://maps.google.com/?q=サウナセンター 鶯谷" },
-      { name: "かるまる池袋", map: "https://maps.google.com/?q=かるまる 池袋" },
-      { name: "タイムズ スパ・レスタ（池袋）", map: "https://maps.google.com/?q=タイムズ スパ レスタ 池袋" },
-      { name: "新橋アスティル", map: "https://maps.google.com/?q=新橋 アスティル" },
-      { name: "東京ドーム天然温泉 スパ ラクーア", map: "https://maps.google.com/?q=スパ ラクーア" },
-      { name: "RAKU SPA 1010 神田", map: "https://maps.google.com/?q=RAKU SPA 1010 神田" },
-      { name: "テルマー湯（新宿）", map: "https://maps.google.com/?q=テルマー湯 新宿" },
-      { name: "天空のアジト マルシンスパ（笹塚）", map: "https://maps.google.com/?q=マルシンスパ 笹塚" },
-      { name: "サウナLAB神田", map: "https://maps.google.com/?q=サウナLAB 神田" },
-      { name: "両国湯屋江戸遊", map: "https://maps.google.com/?q=両国湯屋江戸遊" },
-      { name: "光明泉（中目黒）", map: "https://maps.google.com/?q=光明泉 中目黒" },
-      { name: "黄金湯（錦糸町）", map: "https://maps.google.com/?q=黄金湯 錦糸町" }
+      { name: "よこはま温泉（和光市）", map: "https://maps.google.com/?q=よこはま温泉 和光市", homepage: "" },
+      { name: "スパジアムジャポン（東久留米）", map: "https://maps.google.com/?q=スパジアムジャポン 東久留米", homepage: "" },
+      { name: "サウナ&カプセルホテル北欧（上野）", map: "https://maps.google.com/?q=サウナ 北欧 上野", homepage: "" },
+      { name: "サウナセンター（鶯谷）", map: "https://maps.google.com/?q=サウナセンター 鶯谷", homepage: "" },
+      { name: "かるまる池袋", map: "https://maps.google.com/?q=かるまる 池袋", homepage: "" },
+      { name: "タイムズ スパ・レスタ（池袋）", map: "https://maps.google.com/?q=タイムズ スパ レスタ 池袋", homepage: "" },
+      { name: "新橋アスティル", map: "https://maps.google.com/?q=新橋 アスティル", homepage: "" },
+      { name: "東京ドーム天然温泉 スパ ラクーア", map: "https://maps.google.com/?q=スパ ラクーア", homepage: "" },
+      { name: "RAKU SPA 1010 神田", map: "https://maps.google.com/?q=RAKU SPA 1010 神田", homepage: "" },
+      { name: "テルマー湯（新宿）", map: "https://maps.google.com/?q=テルマー湯 新宿", homepage: "" },
+      { name: "天空のアジト マルシンスパ（笹塚）", map: "https://maps.google.com/?q=マルシンスパ 笹塚", homepage: "" },
+      { name: "サウナLAB神田", map: "https://maps.google.com/?q=サウナLAB 神田", homepage: "" },
+      { name: "両国湯屋江戸遊", map: "https://maps.google.com/?q=両国湯屋江戸遊", homepage: "" },
+      { name: "光明泉（中目黒）", map: "https://maps.google.com/?q=光明泉 中目黒", homepage: "" },
+      { name: "黄金湯（錦糸町）", map: "https://maps.google.com/?q=黄金湯 錦糸町", homepage: "" },
+
+      { name: "レンブラントキャビン & スパ新橋", map: "https://maps.google.com/?q=レンブラントキャビン+スパ新橋", homepage: "https://rembrandt-cabin.com/spa-shimbashi/" },
+      { name: "King & Queen（所沢）", map: "https://maps.google.com/?q=King&Queen 所沢", homepage: "https://king-and-queen.site/" },
+      { name: "ホテルヒルトップ（成増）", map: "https://maps.google.com/?q=ホテルヒルトップ 成増", homepage: "https://www.hotel-hilltop.com/" },
+      { name: "お風呂の王様（和光）", map: "https://maps.google.com/?q=お風呂の王様 和光", homepage: "https://www.ousama2603.com/wako/" },
+      { name: "サウナ東京（赤坂）", map: "https://maps.google.com/?q=サウナ東京 赤坂", homepage: "https://sauna-tokyo.jp/" },
+      { name: "品川サウナ", map: "https://maps.google.com/?q=品川サウナ", homepage: "https://www.shinagawa-sauna.com/" },
+      { name: "和（朝霞）", map: "https://maps.google.com/?q=サウナ 和 朝霞", homepage: "https://asaka-sauna-nagomi.com/" }
     ];
 
     function saunaGacha() {
       const randomIndex = Math.floor(Math.random() * saunas.length);
-      const chosenSauna = saunas[randomIndex];
-      document.getElementById("result").innerHTML = 
-        "今日のサウナは…<br>" + chosenSauna.name + "！" +
-        `<br><a href="${chosenSauna.map}" target="_blank">Googleマップで見る</a>`;
+      const chosen = saunas[randomIndex];
+      let html = "今日のサウナは…<br><strong>" + chosen.name + "</strong>！";
+      html += `<br><a href="${chosen.map}" target="_blank">Googleマップで見る</a>`;
+      if (chosen.homepage) {
+        html += `<br><a href="${chosen.homepage}" target="_blank">公式サイトを見る</a>`;
+      }
+      document.getElementById("result").innerHTML = html;
     }
   </script>
 </body>
