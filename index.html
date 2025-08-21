@@ -3,89 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>都内サウナガチャ</title>
+  <title>サウナガチャ</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: sans-serif;
       text-align: center;
       padding: 20px;
-      margin: 0;
-      background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      background: #f0f8ff;
     }
     h1 {
-      font-size: 1.8em;
-      margin-bottom: 20px;
-      padding: 0 10px;
+      color: #333;
     }
     button {
-      padding: 12px 24px;
+      padding: 10px 20px;
       font-size: 1.2em;
-      border: none;
       border-radius: 8px;
-      background-color: #ff7b54;
+      border: none;
+      background: #ff7f50;
       color: white;
       cursor: pointer;
-      transition: 0.2s;
     }
     button:hover {
-      background-color: #ff5722;
+      background: #ff5722;
     }
-    .result {
-      margin-top: 30px;
-      font-size: 1.3em;
-      font-weight: bold;
-      color: #333;
-      padding: 0 10px;
+    #result {
+      margin-top: 20px;
+      font-size: 1.2em;
     }
-    .result a {
+    a {
       display: inline-block;
-      margin-top: 12px;
-      font-size: 1.1em;
-      color: #007BFF;
+      margin-top: 5px;
+      color: #007bff;
       text-decoration: none;
     }
-    .result a:hover {
+    a:hover {
       text-decoration: underline;
+    }
+    img {
+      margin-top: 15px;
     }
   </style>
 </head>
 <body>
-  <h1>都内サウナガチャ</h1>
-  <button onclick="saunaGacha()">ガチャを回す！</button>
-  <div class="result" id="result"></div>
+  <h1>サウナガチャ</h1>
+  <button onclick="saunaGacha()">今日行くサウナを決める！</button>
+  <div id="result"></div>
 
   <script>
     const saunas = [
-      { name: "カプセル&サウナ ロスコ(中里)", map: "https://maps.google.com/?q=カプセル&サウナ ロスコ", homepage: "https://www.rosco.tokyo/" },
-      { name: "ルーフトップサウナ(西荻南)", map: "https://maps.google.com/?q=ルーフトップサウナ", homepage: "https://rooftopsauna.jp/" },
-      { name: "スパジアムジャポン（東久留米）", map: "https://maps.google.com/?q=スパジアムジャポン 東久留米", homepage: "https://www.spajapo.com/" },
-      { name: "サウナ&カプセルホテル北欧（上野）", map: "https://maps.google.com/?q=サウナ 北欧 上野", homepage: "https://www.saunahokuou.com/" },
-      { name: "サウナセンター（鶯谷）", map: "https://maps.google.com/?q=サウナセンター 鶯谷", homepage: "https://sauna-center.jp/" },
-      { name: "かるまる池袋", map: "https://maps.google.com/?q=かるまる 池袋", homepage: "https://karumaru.jp/ikebukuro/" },
-      { name: "タイムズ スパ・レスタ（池袋）", map: "https://maps.google.com/?q=タイムズ スパ レスタ 池袋", homepage: "" },
-      { name: "新橋アスティル", map: "https://maps.google.com/?q=新橋 アスティル", homepage: "" },
-      { name: "東京ドーム天然温泉 スパ ラクーア", map: "https://maps.google.com/?q=スパ ラクーア", homepage: "" },
-      { name: "RAKU SPA 1010 神田", map: "https://maps.google.com/?q=RAKU SPA 1010 神田", homepage: "" },
-      { name: "テルマー湯（新宿）", map: "https://maps.google.com/?q=テルマー湯 新宿", homepage: "" },
-      { name: "天空のアジト マルシンスパ（笹塚）", map: "https://maps.google.com/?q=マルシンスパ 笹塚", homepage: "" },
-      { name: "サウナLAB神田", map: "https://maps.google.com/?q=サウナLAB 神田", homepage: "" },
-      { name: "両国湯屋江戸遊", map: "https://maps.google.com/?q=両国湯屋江戸遊", homepage: "" },
-      { name: "光明泉（中目黒）", map: "https://maps.google.com/?q=光明泉 中目黒", homepage: "" },
-      { name: "黄金湯（錦糸町）", map: "https://maps.google.com/?q=黄金湯 錦糸町", homepage: "" },
-      { name: "FUROBAKKA(富山)", map: "https://maps.google.com/?q=湯屋 FUROBAKKA", homepage: "https://furobakka.com/" },
-
-      { name: "レンブラントキャビン & スパ新橋", map: "https://maps.google.com/?q=レンブラントキャビン+スパ新橋", homepage: "https://rembrandt-cabin.com/spa-shimbashi/" },
-      { name: "King & Queen（所沢）", map: "https://maps.google.com/?q=King&Queen 所沢", homepage: "https://king-and-queen.site/" },
-      { name: "ホテルヒルトップ（成増）", map: "https://maps.google.com/?q=ホテルヒルトップ 成増", homepage: "https://www.hotel-hilltop.com/" },
-      { name: "お風呂の王様（和光）", map: "https://maps.google.com/?q=お風呂の王様 和光", homepage: "https://www.ousama2603.com/wako/" },
-      { name: "サウナ東京（赤坂）", map: "https://maps.google.com/?q=サウナ東京 赤坂", homepage: "https://sauna-tokyo.jp/" },
-      { name: "品川サウナ", map: "https://maps.google.com/?q=品川サウナ", homepage: "https://www.shinagawa-sauna.com/" },
-      { name: "和（朝霞）", map: "https://maps.google.com/?q=サウナ 和 朝霞", homepage: "https://asaka-sauna-nagomi.com/" }
+      {name:"湯乃泉 豊島園 庭の湯", map:"https://maps.google.com/?q=湯乃泉豊島園庭の湯", homepage:"https://www.niwanoyu.jp/"},
+      {name:"タイムズ スパ・レスタ(池袋)", map:"https://maps.google.com/?q=タイムズスパレスタ", homepage:"https://www.timesspa-resta.jp/"},
+      {name:"かるまる池袋", map:"https://maps.google.com/?q=かるまる池袋", homepage:"https://www.karumarutt.com/"},
+      {name:"スパジアムジャポン(東久留米)", map:"https://maps.google.com/?q=スパジアムジャポン", homepage:"https://spajapo.com/"},
+      {name:"サウナ東京(赤坂)", map:"https://maps.google.com/?q=サウナ東京", homepage:"https://saunatokyo.jp/"},
+      {name:"品川サウナ", map:"https://maps.google.com/?q=品川サウナ", homepage:"https://shinagawa-sauna.com/"},
+      {name:"レンブラントキャビン & スパ新橋", map:"https://maps.google.com/?q=レンブラントキャビン&スパ新橋", homepage:"https://rembrandt-cabin.com/"},
+      {name:"King&Queen(所沢)", map:"https://maps.google.com/?q=King&Queen所沢", homepage:"https://kingqueen-sauna.com/"},
+      {name:"ホテルヒルトップ(成増)", map:"https://maps.google.com/?q=ホテルヒルトップ成増", homepage:"https://www.hotel-hilltop.jp/"},
+      {name:"お風呂の王様(和光)", map:"https://maps.google.com/?q=お風呂の王様和光", homepage:"https://www.ousama2603.com/shop/wako/"},
+      {name:"和(朝霞)", map:"https://maps.google.com/?q=和サウナ朝霞", homepage:"https://nagomi-sauna.com/"},
+      {name:"FUROBAKKA(富山)", map:"https://maps.google.com/?q=FUROBAKKA富山", homepage:"https://furobakka.jp/"},
     ];
 
     function saunaGacha() {
@@ -96,6 +73,13 @@
       if (chosen.homepage) {
         html += `<br><a href="${chosen.homepage}" target="_blank">公式サイトを見る</a>`;
       }
+
+      // FUROBAKKAが出たら特別演出
+      if (chosen.name.includes("FUROBAKKA")) {
+        html += `<br><span style="font-size:1.5em; color:red; font-weight:bold;">🎉大当たり！！🎉</span>`;
+        html += `<br><img src="imagema.png" alt="大当たり画像" style="max-width:90%; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.3);">`;
+      }
+
       document.getElementById("result").innerHTML = html;
     }
   </script>
